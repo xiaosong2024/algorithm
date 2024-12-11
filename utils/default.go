@@ -18,18 +18,20 @@ func VarDump(data ...interface{}) {
 			fallthrough
 		case reflect.Struct:
 			bytes, _ := json.Marshal(val)
-			fmt.Println(string(bytes))
+			fmt.Print(string(bytes))
 		default:
-			fmt.Println(val)
+			fmt.Print(val)
 		}
+		fmt.Print(" ")
 	}
+	fmt.Println("")
 }
 
 func RandIntArr(min, max float64, num int) []int {
 	max = max + 1
 	rand.Seed(time.Now().UnixMicro())
 	ret := []int{}
-	for i := 0; i <= num; i++ {
+	for i := 0; i < num; i++ {
 		tmp := rand.Float64()*(max-min) + min
 		ret = append(ret, int(tmp))
 	}

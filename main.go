@@ -2,48 +2,59 @@ package main
 
 import (
 	"algorithm/sort"
-	"algorithm/tree"
 	"algorithm/utils"
-	"fmt"
+	"time"
 )
 
 func main() {
+	go func() {
+		t := time.Now()
+		for i := 0; i < 1000; i++ {
+			test(sort.BubbleSort)
+		}
+		utils.VarDump("BubbleSort", time.Now().Sub(t).Seconds())
+	}()
 
-	tree1 := &tree.BiTree{
-		Value: 1,
-		LeftChild: &tree.BiTree{
-			Value: 2,
-			LeftChild: &tree.BiTree{
-				Value:      4,
-				LeftChild:  nil,
-				RightChild: nil,
-			},
-			RightChild: &tree.BiTree{
-				Value:      5,
-				LeftChild:  nil,
-				RightChild: nil,
-			},
-		},
-		RightChild: &tree.BiTree{
-			Value: 3,
-			LeftChild: &tree.BiTree{
-				Value:      6,
-				LeftChild:  nil,
-				RightChild: nil,
-			},
-			RightChild: &tree.BiTree{
-				Value:      7,
-				LeftChild:  nil,
-				RightChild: nil,
-			},
-		},
+	go func() {
+		t := time.Now()
+		for i := 0; i < 1000; i++ {
+			test(sort.SelectSort)
+		}
+		utils.VarDump("SelectSort", time.Now().Sub(t).Seconds())
+	}()
+
+	go func() {
+		t := time.Now()
+		for i := 0; i < 1000; i++ {
+			test(sort.InsertSort)
+		}
+		utils.VarDump("InsertSort", time.Now().Sub(t).Seconds())
+	}()
+
+	go func() {
+		t := time.Now()
+		for i := 0; i < 1000; i++ {
+			test(sort.MergeSort)
+		}
+		utils.VarDump("MergeSort", time.Now().Sub(t).Seconds())
+	}()
+
+	go func() {
+		t := time.Now()
+		for i := 0; i < 1000; i++ {
+			test(sort.QuickSort)
+		}
+		utils.VarDump("QuickSort", time.Now().Sub(t).Seconds())
+	}()
+	for {
 	}
-	tree.Floor(tree1)
+
 }
 
-func test() {
-	arr := utils.RandIntArr(0, 100, 10)
-	sort.InsertSort(arr)
-	utils.VarDump(arr)
-	fmt.Println(utils.Check(arr))
+func test(f func([]int)) {
+	arr := utils.RandIntArr(0, 10000, 10000)
+	f(arr)
+	if err := utils.Check(arr); err != nil {
+		utils.VarDump(err)
+	}
 }
