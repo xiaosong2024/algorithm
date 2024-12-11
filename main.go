@@ -7,6 +7,10 @@ import (
 )
 
 func main() {
+	test(sort.QuickSort)
+}
+
+func timeTest() {
 	go func() {
 		t := time.Now()
 		for i := 0; i < 1000; i++ {
@@ -52,8 +56,10 @@ func main() {
 }
 
 func test(f func([]int)) {
-	arr := utils.RandIntArr(0, 10000, 10000)
+	arr := utils.RandIntArr(0, 10, 10)
+	utils.VarDump(arr)
 	f(arr)
+	utils.VarDump(arr)
 	if err := utils.Check(arr); err != nil {
 		utils.VarDump(err)
 	}

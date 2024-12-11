@@ -10,17 +10,13 @@ func QuickSort(arr []int) {
 
 func _quickSort(arr []int) {
 	n := len(arr)
-	if n == 1 {
+	if n <= 1 {
 		return
 	}
 	l, r := partition(arr)
 	// 左边有没有元素
-	if l > 0 {
-		_quickSort(arr[0:l])
-	}
-	if r < n-1 {
-		_quickSort(arr[r+1 : n])
-	}
+	_quickSort(arr[0:l])
+	_quickSort(arr[r+1 : n])
 }
 
 // 返回这个数组中 等于第一项的开始，结束位置
