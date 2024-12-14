@@ -1,20 +1,21 @@
 package main
 
 import (
-	"algorithm/sort"
-	"algorithm/utils"
 	"fmt"
 )
 
 func main() {
-	for i := 0; i <= 10; i++ {
-		test()
-	}
+	arr := []int{1, 2, 3, 4, 5, 6}
+	backPrint(arr, 0)
 }
 
-func test() {
-	arr := utils.RandIntArr(0, 100, 10)
-	sort.InsertSort(arr)
-	utils.VarDump(arr)
-	fmt.Println(utils.Check(arr))
+func backPrint(arr []int, cur int) {
+	n := len(arr)
+	left := n - cur
+	if left == 0 {
+		return
+	}
+	next := cur + 1
+	backPrint(arr, next)
+	fmt.Println(arr[cur])
 }
